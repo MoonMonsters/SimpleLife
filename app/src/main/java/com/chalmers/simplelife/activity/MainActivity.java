@@ -61,6 +61,31 @@ public class MainActivity extends AppCompatActivity {
         mNewsFragment = new NewsFragment();
         mJokeFragment = new JokeFragment();
         mHistoryFragment = new HistoryFragment();
+        initFragments();
+    }
+
+    NavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            if (item.getGroupId() == R.id.group_nav) {
+
+                if (item.getItemId() == R.id.menu_nav_news) {
+                    showNewsFragment();
+
+                } else if (item.getItemId() == R.id.menu_nav_joke) {
+                    showJokeFragment();
+                } else if (item.getItemId() == R.id.menu_nav_history) {
+                    showHistoryFragment();
+                }
+            }
+
+            dlMainDrawer.closeDrawers();
+            return true;
+        }
+    };
+
+    private void initFragments() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.frameLayout_main,mNewsFragment)
                 .add(R.id.frameLayout_main,mJokeFragment)
@@ -71,36 +96,27 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    NavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    private void showHistoryFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .hide(mNewsFragment)
+                .hide(mJokeFragment)
+                .show(mHistoryFragment)
+                .commit();
+    }
 
-            if (item.getGroupId() == R.id.group_nav) {
+    private void showJokeFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .hide(mNewsFragment)
+                .hide(mHistoryFragment)
+                .show(mJokeFragment)
+                .commit();
+    }
 
-                if (item.getItemId() == R.id.menu_nav_news) {
-                    getSupportFragmentManager().beginTransaction()
-                            .hide(mJokeFragment)
-                            .hide(mHistoryFragment)
-                            .show(mNewsFragment)
-                            .commit();
-
-                } else if (item.getItemId() == R.id.menu_nav_joke) {
-                    getSupportFragmentManager().beginTransaction()
-                            .hide(mNewsFragment)
-                            .hide(mHistoryFragment)
-                            .show(mJokeFragment)
-                            .commit();
-                } else if (item.getItemId() == R.id.menu_nav_history) {
-                    getSupportFragmentManager().beginTransaction()
-                            .hide(mNewsFragment)
-                            .hide(mJokeFragment)
-                            .show(mHistoryFragment)
-                            .commit();
-                }
-            }
-
-            dlMainDrawer.closeDrawers();
-            return true;
-        }
-    };
+    private void showNewsFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .hide(mJokeFragment)
+                .hide(mHistoryFragment)
+                .show(mNewsFragment)
+                .commit();
+    }
 }

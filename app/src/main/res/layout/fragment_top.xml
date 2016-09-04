@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     tools:context="com.chalmers.simplelife.fragment.news.TopFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/lv_top_news"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="头条" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

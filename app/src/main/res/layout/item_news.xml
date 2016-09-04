@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_news_pic"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        />
+
+    <RelativeLayout
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_news_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="婆婆和我吵架，晚上居然给我炖汤，得知食材我掀翻桌子大哭"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:layout_below="@id/tv_news_title"
+            android:id="@+id/tv_news_author"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:text="网易新闻"
+            />
+        <TextView
+            android:id="@+id/tv_news_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:text="2016-09-04 17:23"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
