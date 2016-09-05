@@ -6,8 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.chalmers.simplelife.R;
-import com.chalmers.simplelife.adapter.FragmentViewPagerAdapter;
-import com.chalmers.simplelife.fragment.news.BaseFragment;
+import com.chalmers.simplelife.adapter.NewsViewPagerAdapter;
 
 import butterknife.Bind;
 
@@ -21,7 +20,7 @@ public class NewsFragment extends BaseFragment {
     @Bind(R.id.vp_fragment_content)
     ViewPager vpFragmentContent;
 
-    private FragmentViewPagerAdapter adapter ;
+    private NewsViewPagerAdapter adapter ;
 
     @Override
     public int getLayoutResource() {
@@ -30,7 +29,7 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        adapter = new FragmentViewPagerAdapter(getActivity().getSupportFragmentManager(),
+        adapter = new NewsViewPagerAdapter(getActivity().getSupportFragmentManager(),
                 getActivity());
         vpFragmentContent.setAdapter(adapter);
         tlFragmentTab.setupWithViewPager(vpFragmentContent);

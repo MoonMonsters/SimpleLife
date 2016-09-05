@@ -1,4 +1,4 @@
-package com.chalmers.simplelife.fragment.news;
+package com.chalmers.simplelife.fragment;
 
 
 import android.os.Bundle;

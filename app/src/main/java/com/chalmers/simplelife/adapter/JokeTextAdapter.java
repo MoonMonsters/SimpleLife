@@ -5,12 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chalmers.simplelife.R;
-import com.chalmers.simplelife.bean.news.News;
-import com.squareup.picasso.Picasso;
+import com.chalmers.simplelife.bean.joke.Joke;
+import com.chalmers.simplelife.view.CircleDot;
 
 import java.util.ArrayList;
 
@@ -18,27 +17,27 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Chalmers on 2016-09-04 21:31.
+ * Created by Chalmers on 2016-09-05 21:32.
  * email:qxinhai@yeah.net
  */
-public class NewsAdapter extends BaseAdapter {
+public class JokeTextAdapter extends BaseAdapter {
 
-    private ArrayList<News> mNewses;
     private Context mContext;
+    private ArrayList<Joke> mJokes;
 
-    public NewsAdapter(Context context, ArrayList<News> newses){
+    public JokeTextAdapter(Context context, ArrayList<Joke> jokes){
         this.mContext = context;
-        this.mNewses = newses;
+        this.mJokes = jokes;
     }
 
     @Override
     public int getCount() {
-        return mNewses.size();
+        return mJokes.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mNewses.get(position);
+        return mJokes.get(position);
     }
 
     @Override
@@ -52,41 +51,31 @@ public class NewsAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if(convertView == null){
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_news,parent,false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_joke_text,parent,false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.bindData(mNewses.get(position));
+        viewHolder.bindData(mJokes.get(position));
 
         return convertView;
     }
 
     class ViewHolder{
-
-        @Bind(R.id.iv_news_pic)
-        ImageView ivNewsPic;
-        @Bind(R.id.tv_news_title)
-        TextView tvNewsTitle;
-        @Bind(R.id.tv_news_author)
-        TextView tvNewsAuthor;
-        @Bind(R.id.tv_news_date)
-        TextView tvNewsDate;
+        @Bind(R.id.cd_fragment_joke_text)
+        CircleDot cdFragmentJokeText;
+        @Bind(R.id.tv_fragment_joke_text)
+        TextView tvFragmentJokeText;
 
         public ViewHolder(View view){
             ButterKnife.bind(this,view);
         }
 
-        public void bindData(News news){
-            Picasso.with(mContext)
-                    .load(news.getThumbnail_pic_s())
-                    .into(ivNewsPic);
-            tvNewsTitle.setText(news.getTitle());
-            tvNewsAuthor.setText(news.getAuthor_name());
-            tvNewsDate.setText(news.getDate());
+        public void bindData(Joke joke){
+            cdFragmentJokeText.setData(mJokes.indexOf(joke) + 1);
+            tvFragmentJokeText.setText(joke.getContent());
         }
-
     }
 }

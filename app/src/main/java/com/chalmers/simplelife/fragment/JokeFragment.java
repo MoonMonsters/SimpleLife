@@ -1,30 +1,51 @@
 package com.chalmers.simplelife.fragment;
 
 
-import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.view.ViewPager;
 
 import com.chalmers.simplelife.R;
+import com.chalmers.simplelife.adapter.JokeViewPagerAdapter;
+import com.chalmers.simplelife.fragment.joke.ImgJokeFragment;
+import com.chalmers.simplelife.fragment.joke.TextJokeFragment;
+
+import java.util.ArrayList;
+
+import butterknife.Bind;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class JokeFragment extends Fragment {
+public class JokeFragment extends BaseFragment {
 
 
-    public JokeFragment() {
-        // Required empty public constructor
-    }
+    @Bind(R.id.tl_fragment_joke)
+    TabLayout tlFragmentJoke;
+    @Bind(R.id.vp_fragment_joke)
+    ViewPager vpFragmentJoke;
 
+    private ArrayList<BaseFragment> mFragments;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_joke, container, false);
+    public int getLayoutResource() {
+        return R.layout.fragment_joke;
     }
 
+    @Override
+    public void initData() {
+        mFragments = new ArrayList<>();
+        mFragments.add(new TextJokeFragment());
+        mFragments.add(new ImgJokeFragment());
+
+        JokeViewPagerAdapter adapter = new JokeViewPagerAdapter(getActivity().getSupportFragmentManager(),
+                getActivity(),mFragments);
+        vpFragmentJoke.setAdapter(adapter);
+        tlFragmentJoke.setupWithViewPager(vpFragmentJoke);
+    }
+
+    @Override
+    public void initListener() {
+
+    }
 }

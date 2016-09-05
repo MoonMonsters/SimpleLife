@@ -6,24 +6,28 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.chalmers.simplelife.R;
-import com.chalmers.simplelife.fragment.news.FragmentFactory;
+import com.chalmers.simplelife.fragment.BaseFragment;
+
+import java.util.ArrayList;
 
 /**
- * Created by Chalmers on 2016-09-04 16:36.
+ * Created by Chalmers on 2016-09-05 20:56.
  * email:qxinhai@yeah.net
  */
-public class FragmentViewPagerAdapter extends FragmentPagerAdapter {
+public class JokeViewPagerAdapter extends FragmentPagerAdapter {
 
-    String mTitles[];
+    private ArrayList<BaseFragment> mFragments;
+    private String mTitles[];
 
-    public FragmentViewPagerAdapter(FragmentManager fm, Context context) {
+    public JokeViewPagerAdapter(FragmentManager fm, Context context, ArrayList<BaseFragment> fragments) {
         super(fm);
-        mTitles = context.getResources().getStringArray(R.array.fragment_name);
+        this.mFragments = fragments;
+        mTitles = context.getResources().getStringArray(R.array.joke_fragment_name);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return FragmentFactory.newInstance(position);
+        return mFragments.get(position);
     }
 
     @Override

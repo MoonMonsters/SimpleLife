@@ -1,5 +1,8 @@
 package com.chalmers.simplelife.fragment.news;
 
+import com.chalmers.simplelife.fragment.BaseFragment;
+import com.chalmers.simplelife.utils.Config;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,34 +43,34 @@ public class FragmentFactory {
 
         switch (fragmentType){
             case TOP_FRAGMENT:
-                fragment = new TopFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_TOP);
                 break;
             case SHEHUI_FRAGMENT:
-                fragment = new ShehuiFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_SHEHUI);
                 break;
             case GUONEI_FRAGMENT:
-                fragment = new GuoneiFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_GUONEI);
                 break;
             case GUOJI_FRAGMENT:
-                fragment = new GuojiFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_GUOJI);
                 break;
             case YULE_FRAGMENT:
-                fragment = new YuleFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_YULE);
                 break;
             case TIYU_FRAGMENT:
-                fragment = new TiyuFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_TIYU);
                 break;
             case JUNSHI_FRAGMENT:
-                fragment = new JunshiFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_JUNSHI);
                 break;
             case KEJI_FRAGMENT:
-                fragment = new KejiFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_KEJI);
                 break;
             case CAIJING_FRAGMENT:
-                fragment = new CaijingFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_CAIJING);
                 break;
             case SHISHANG_FRAGMENT:
-                fragment = new ShishangFragment();
+                fragment = new AllNewsFragment().instance(Config.COMMAND_SHISHANG);
                 break;
         }
 

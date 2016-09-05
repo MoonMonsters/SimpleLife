@@ -20,4 +20,9 @@
         <item>时尚</item>
     </string-array>
 
+    <string-array name="joke_fragment_name">
+        <item>笑话</item>
+        <item>趣图</item>
+    </string-array>
+
 </resources>

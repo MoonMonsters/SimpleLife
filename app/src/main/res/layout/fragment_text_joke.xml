@@ -2,12 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.chalmers.simplelife.fragment.news.KejiFragment">
+    tools:context="com.chalmers.simplelife.fragment.joke.TextJokeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/lv_fragment_joke_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="科技" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

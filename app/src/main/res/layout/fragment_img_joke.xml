@@ -1,0 +1,32 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.chalmers.simplelife.fragment.joke.ImgJokeFragment">
+
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_fragment_joke_img"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+    <WebView
+        android:id="@+id/wv_fragment_joke_img"
+        android:layout_width="match_parent"
+        android:layout_gravity="center|center_horizontal"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/iv_fragment_joke_left"
+        android:layout_gravity="left|center_vertical"
+        android:layout_width="50dp"
+        android:background="@drawable/ic_left"
+        android:layout_height="50dp" />
+
+    <ImageView
+        android:id="@+id/iv_fragment_joke_right"
+        android:layout_gravity="right|center_vertical"
+        android:layout_width="50dp"
+        android:background="@drawable/ic_right"
+        android:layout_height="50dp" />
+
+</FrameLayout>
