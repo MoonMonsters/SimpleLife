@@ -18,8 +18,12 @@ public interface Config {
 
     /** 获取新闻的url */
     String URL_NEWS_DATA = "http://v.juhe.cn/toutiao/index";
+    /** 文字笑话接口 */
     String URL_JOKE_DATA_TEXT = "http://japi.juhe.cn/joke/content/text.from";
+    /** 图片笑话接口 */
     String URL_JOKE_DATA_IMG = "http://japi.juhe.cn/joke/img/text.from";
+    /** 获取历史上的今天数据接口 */
+    String URL_HISTORY_DATA = "http://api.juheapi.com/japi/toh";
 
     /** 头条 */
     String COMMAND_TOP = "top";

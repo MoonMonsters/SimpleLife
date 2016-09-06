@@ -64,6 +64,30 @@ public class NetConnection {
         }));
     }
 
+    /**
+     * 获得历史上的今日数据
+     * @param context 上下文对象
+     * @param month 月
+     * @param day 日
+     * @param dataCallback 回调方法
+     */
+    public static void netConnectionWithHistory(Context context, int month, int day, final DataCallback dataCallback){
+        String url = Config.URL_HISTORY_DATA + "?v=1.0&month="+month+"&day="+day+
+                "&key="+Config.HISTORY_APP_KEY;
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                dataCallback.doSuccess(response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                dataCallback.doFail(error.getMessage());
+            }
+        }));
+    }
+
     public interface DataCallback{
         void doSuccess(String jsonData);
         void doFail(String msg);
