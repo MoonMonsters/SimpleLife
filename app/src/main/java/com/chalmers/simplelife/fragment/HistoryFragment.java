@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.chalmers.simplelife.R;
@@ -48,6 +49,9 @@ public class HistoryFragment extends BaseFragment {
             public void doSuccess(String jsonData) {
                 mHistories = new Gson().fromJson(jsonData, HistoryData.class)
                         .getResult();
+
+                Log.i("HistoryFragment",mHistories.toString());
+
                 rvFragmentHistory.setHasFixedSize(true);
 //                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 GridLayoutManager manager = new GridLayoutManager(getContext(),2);
@@ -59,7 +63,7 @@ public class HistoryFragment extends BaseFragment {
 
             @Override
             public void doFail(String msg) {
-                Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"网络连接错误",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -1,14 +1,13 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/srl_fragment_joke_img"
     android:layout_height="match_parent"
     tools:context="com.chalmers.simplelife.fragment.joke.ImgJokeFragment">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/iv_fragment_joke_img"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <WebView
         android:id="@+id/wv_fragment_joke_img"
         android:layout_width="match_parent"
@@ -29,5 +28,5 @@
         android:layout_width="50dp"
         android:background="@drawable/ic_right"
         android:layout_height="50dp" />
-
-</FrameLayout>
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

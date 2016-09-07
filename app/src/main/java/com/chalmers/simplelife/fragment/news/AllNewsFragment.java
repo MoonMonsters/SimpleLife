@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.chalmers.simplelife.R;
 import com.chalmers.simplelife.activity.NewsDetailActivity;
@@ -44,7 +45,7 @@ public class AllNewsFragment extends BaseFragment {
     @Override
     public void initData() {
 
-        String command = getArguments().getString(COMMAND,"top");
+        String command = getArguments().getString(COMMAND, "top");
 
         NetConnection.netConnectionWithNews(getActivity(), command,
                 new NetConnection.DataCallback() {
@@ -52,11 +53,11 @@ public class AllNewsFragment extends BaseFragment {
                     public void doSuccess(String jsonData) {
                         mNewses = new Gson().fromJson(jsonData, NewsData.class)
                                 .getResult().getData();
-                        Log.i("TAG",mNewses.toString());
+                        Log.i("AllNewsFragment", mNewses.toString());
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                mAdapter = new NewsAdapter(getActivity(),mNewses);
+                                mAdapter = new NewsAdapter(getActivity(), mNewses);
                                 lvTopNews.setAdapter(mAdapter);
                             }
                         });
@@ -64,7 +65,7 @@ public class AllNewsFragment extends BaseFragment {
 
                     @Override
                     public void doFail(String msg) {
-
+                        Toast.makeText(getContext(),"网络连接错误",Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -75,15 +76,15 @@ public class AllNewsFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                intent.putExtra(Config.URL_NEWS_DETAIL_INTENT,mNewses.get(position).getUrl());
+                intent.putExtra(Config.URL_NEWS_DETAIL_INTENT, mNewses.get(position).getUrl());
                 startActivity(intent);
             }
         });
     }
 
-    public BaseFragment instance(String command ){
+    public BaseFragment instance(String command) {
         Bundle bundle = new Bundle();
-        bundle.putString(COMMAND,command);
+        bundle.putString(COMMAND, command);
         setArguments(bundle);
 
         return this;

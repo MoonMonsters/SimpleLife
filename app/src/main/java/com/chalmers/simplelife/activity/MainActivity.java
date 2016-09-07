@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 .hide(mJokeFragment)
                 .show(mHistoryFragment)
                 .commit();
+        actionBar.setTitle(R.string.menu_nav_history);
     }
 
     private void showJokeFragment() {
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 .hide(mHistoryFragment)
                 .show(mJokeFragment)
                 .commit();
+        actionBar.setTitle(R.string.menu_nav_joke);
     }
 
     private void showNewsFragment() {
@@ -118,5 +120,6 @@ public class MainActivity extends AppCompatActivity {
                 .hide(mHistoryFragment)
                 .show(mNewsFragment)
                 .commit();
+        actionBar.setTitle(R.string.menu_nav_news);
     }
 }

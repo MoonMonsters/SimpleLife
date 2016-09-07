@@ -1,8 +1,10 @@
 package com.chalmers.simplelife.fragment.joke;
 
-
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.chalmers.simplelife.R;
 import com.chalmers.simplelife.adapter.JokeTextAdapter;
@@ -24,12 +26,13 @@ public class TextJokeFragment extends BaseFragment {
 
     private int index = 1;
     private int pageSize = 20;
-
+    private JokeTextAdapter mAdapter;
     private ArrayList<Joke> mJokes;
 
+    @Bind(R.id.srl_fragment_joke_text)
+    SwipeRefreshLayout srlFragmentJokeText;
     @Bind(R.id.lv_fragment_joke_text)
     ListView lvFragmentJokeText;
-
     @Override
     public int getLayoutResource() {
         return R.layout.fragment_text_joke;
@@ -37,27 +40,44 @@ public class TextJokeFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        NetConnection.netConnectionWithJoke(getActivity(), Config.URL_JOKE_DATA_TEXT,
-                index, pageSize, new NetConnection.DataCallback() {
-                    @Override
-                    public void doSuccess(String jsonData) {
-                        mJokes = new Gson().fromJson(jsonData, JokeData.class)
-                                .getResult().getData();
+        // 顶部刷新的样式
+//        srlFragmentJokeText.setColorSchemeColors();
 
-                        JokeTextAdapter adapter = new JokeTextAdapter(getActivity(),
-                                mJokes);
-                        lvFragmentJokeText.setAdapter(adapter);
-                    }
-
-                    @Override
-                    public void doFail(String msg) {
-
-                    }
-                });
+        mJokes = new ArrayList<>();
+        mAdapter = new JokeTextAdapter(getActivity(),
+                mJokes);
+        lvFragmentJokeText.setAdapter(mAdapter);
+        netGetData();
     }
 
     @Override
     public void initListener() {
+        srlFragmentJokeText.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                index ++;
+                netGetData();
+            }
+        });
+    }
 
+    private void netGetData(){
+        NetConnection.netConnectionWithJoke(getActivity(), Config.URL_JOKE_DATA_TEXT,
+                index, pageSize, new NetConnection.DataCallback() {
+                    @Override
+                    public void doSuccess(String jsonData) {
+                        mJokes.addAll(0,new Gson().fromJson(jsonData, JokeData.class)
+                                .getResult().getData());
+
+                        mAdapter.notifyDataSetChanged();
+                        Log.i("TextJokeFragment",mJokes.toString());
+                        srlFragmentJokeText.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void doFail(String msg) {
+                        Toast.makeText(getContext(),"网络连接错误",Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

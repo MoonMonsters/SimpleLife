@@ -2,6 +2,8 @@ package com.chalmers.simplelife.fragment.joke;
 
 
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -32,6 +34,8 @@ public class ImgJokeFragment extends BaseFragment {
     ImageView ivLeft;
     @Bind(R.id.iv_fragment_joke_right)
     ImageView ivRight;
+    @Bind(R.id.srl_fragment_joke_img)
+    SwipeRefreshLayout srlFragmentJokeImg;
 
     private int page = 1;
     private int pageSize = 20;
@@ -45,18 +49,27 @@ public class ImgJokeFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        mJokes = new ArrayList<>();
+        netGetData();
+    }
+
+    private void netGetData(){
         NetConnection.netConnectionWithJoke(getActivity(), Config.URL_JOKE_DATA_IMG,
                 page, pageSize, new NetConnection.DataCallback() {
                     @Override
                     public void doSuccess(String jsonData) {
-                        mJokes = new Gson().fromJson(jsonData, JokeData.class)
-                                .getResult().getData();
+                        mJokes.addAll(0,new Gson().fromJson(jsonData, JokeData.class)
+                                .getResult().getData());
+
+                        Log.i("ImgJokeFragment",mJokes.toString());
+                        index = 0;
                         setShowImage();
+                        srlFragmentJokeImg.setRefreshing(false);
                     }
 
                     @Override
                     public void doFail(String msg) {
-
+                        Toast.makeText(getContext(),"网络连接错误",Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -66,6 +79,14 @@ public class ImgJokeFragment extends BaseFragment {
         ImgClickListener imgClickListener = new ImgClickListener();
         ivLeft.setOnClickListener(imgClickListener);
         ivRight.setOnClickListener(imgClickListener);
+
+        srlFragmentJokeImg.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                page ++;
+                netGetData();
+            }
+        });
     }
 
     private void setShowImage(){

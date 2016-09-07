@@ -21,10 +21,14 @@ public abstract class BaseFragment extends Fragment {
         View view = inflater.inflate(getLayoutResource(),container,false);
         ButterKnife.bind(this,view);
 
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         initData();
         initListener();
-
-        return view;
     }
 
     /** 返回布局id */
